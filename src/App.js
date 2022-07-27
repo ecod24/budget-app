@@ -1,32 +1,38 @@
-import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
-//const API = process.env.SERVER_URL;
-
-// console.log(API);
+import NavBar from "./Components/NavBar";
+import { Route, Routes } from "react-router";
+import NewTransaction from "./Pages/NewTransaction";
+import Transactions from "./Components/Transactions";
+import ShowTransaction from "./Pages/ShowTransaction";
+const API = process.env.REACT_APP_API_URL;
 
 function App() {
-	const [home, setHome] = useState("");
+	//const [home, setHome] = useState("");
+	const [data, setData] = useState([]);
 	useEffect(() => {
 		axios
-			.get(`https://budget-app-api-ecod24.herokuapp.com`)
+			.get(`${API}/transactions`)
 			.then((response) => {
-				setHome(response.data);
+				setData(response.data);
+				//setHome(response.data);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
-	}, [home]);
+	}, [data]);
 
 	return (
 		<div className="App">
 			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<>
-					<p>{home}</p>
-				</>
+				<NavBar />
 			</header>
+			<Routes>
+				<Route path="/" element={<Transactions data={data} />} />
+				<Route path="/transactions/new" element={<NewTransaction />} />
+				<Route path="/transactions/:id" element={<ShowTransaction />} />
+			</Routes>
 		</div>
 	);
 }
