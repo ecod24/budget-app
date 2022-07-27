@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router";
 import NewTransaction from "./Pages/NewTransaction";
 import Transactions from "./Components/Transactions";
 import ShowTransaction from "./Pages/ShowTransaction";
+import EditTransaction from "./Pages/EditTransaction";
 const API = process.env.REACT_APP_API_URL;
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
 				<Route path="/" element={<Transactions data={data} />} />
 				<Route path="/transactions/new" element={<NewTransaction />} />
 				<Route path="/transactions/:id" element={<ShowTransaction />} />
+				<Route path="/transactions/:id/edit" element={<EditTransaction />} />
 			</Routes>
 		</div>
 	);
