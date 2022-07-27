@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 const API = process.env.REACT_APP_API_URL;
 
 export default function ShowTransaction() {
 	const { id } = useParams();
+	const navigate = useNavigate();
 	const [transaction, setTransaction] = useState({});
 	useEffect(() => {
 		axios
@@ -18,7 +19,14 @@ export default function ShowTransaction() {
 			});
 	});
 	const deleteEntry = () => {
-		axios.delete(`${API}/transactions/${id}`).then();
+		axios
+			.delete(`${API}/transactions/${id}`)
+			.then(() => {
+				navigate("/");
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 	return (
 		<div>
