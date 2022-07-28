@@ -1,12 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-const API = process.env.REACT_APP_API_URL;
 
-export default function ShowTransaction() {
+export default function ShowTransaction(props) {
+	const { deleteEntry } = props;
 	const { id } = useParams();
-	const navigate = useNavigate();
 	const [transaction, setTransaction] = useState({});
 	useEffect(() => {
 		axios
@@ -17,17 +16,8 @@ export default function ShowTransaction() {
 			.catch((error) => {
 				console.log(error);
 			});
-	});
-	const deleteEntry = () => {
-		axios
-			.delete(`${API}/transactions/${id}`)
-			.then(() => {
-				navigate("/");
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
+	}, [id]);
+
 	return (
 		<div>
 			<h1>{transaction.item_name}</h1>
@@ -38,7 +28,7 @@ export default function ShowTransaction() {
 			<Link to={`/transactions/${id}/edit`}>
 				<button> Edit</button>
 			</Link>
-			<button onClick={deleteEntry}>Delete</button>
+			<button onClick={() => deleteEntry(id)}>Delete</button>
 		</div>
 	);
 }

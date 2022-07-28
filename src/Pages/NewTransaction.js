@@ -24,7 +24,7 @@ export default function NewTransaction(props) {
 		axios
 			.post(`${API}/transactions`, transaction)
 			.then((response) => {
-				navigate("/");
+				navigate("/transactions");
 			})
 			.catch((error) => {
 				console.log(error);

@@ -14,7 +14,6 @@ export default function EditTransaction(props) {
 		category: "",
 	});
 	useEffect(() => {
-		//put current transaction in value for
 		axios
 			.get(`${API}/transactions/${id}`)
 			.then((response) => {
@@ -32,7 +31,6 @@ export default function EditTransaction(props) {
 	};
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		// put into backend/transactions
 		axios
 			.put(`${API}/transactions/${id}`, transaction)
 			.then((response) => {
@@ -41,7 +39,6 @@ export default function EditTransaction(props) {
 			.catch((error) => {
 				console.log(error);
 			});
-		// go to frontend/transactions
 	};
 	return (
 		<div className="transaction-form">

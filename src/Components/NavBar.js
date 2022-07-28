@@ -5,7 +5,8 @@ import "./NavBar.css";
 export default function NavBar() {
 	return (
 		<nav>
-			<Link to="/">All Transactions</Link>
+			<Link to="/">Home</Link>
+			<Link to="/transactions">All Transactions</Link>
 			<Link to="/transactions/new">New Transaction</Link>
 		</nav>
 	);
