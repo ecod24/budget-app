@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function Transactions(props) {
 	const { deleteEntry, API } = props;
-	const [total, setTotal] = useState(0);
+	//const [total, setTotal] = useState(0);
 	const [data, setData] = useState([]);
 	useEffect(() => {
 		axios
@@ -16,12 +16,14 @@ export default function Transactions(props) {
 			.catch((error) => {
 				console.log(error);
 			});
-		setTotal(findTotal(data));
+		// setTotal(findTotal(data));
 	}, []);
 	const findTotal = (objectArr) => {
-		return objectArr.reduce((prev, current) => {
-			return prev.amount + current.amount;
-		}, 0);
+		let total = 0;
+		objectArr.forEach((item) => {
+			total += item.amount;
+		});
+		return total;
 	};
 	const moneyColor = (money) => {
 		if (money > 1000) {
@@ -34,9 +36,7 @@ export default function Transactions(props) {
 	};
 	return (
 		<div className="transactions">
-			<h2>
-				Total: $<p className={moneyColor(total)}>{total}</p>
-			</h2>
+			<h2 className={moneyColor(findTotal(data))}>Total: {findTotal(data)} </h2>
 			{data.map((transaction, index) => {
 				return (
 					<Transaction

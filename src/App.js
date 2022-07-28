@@ -11,9 +11,7 @@ import ErrorPage from "./Pages/ErrorPage";
 const API = process.env.REACT_APP_API_URL;
 
 function App() {
-	//const [home, setHome] = useState("");
 	const navigate = useNavigate();
-
 	const deleteEntry = (id) => {
 		axios
 			.delete(`${API}/transactions/${id}`)
@@ -26,7 +24,7 @@ function App() {
 	};
 	return (
 		<div className="App">
-			<header className="App-header">
+			<header>
 				<NavBar />
 			</header>
 			<Routes>
