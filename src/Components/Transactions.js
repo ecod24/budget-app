@@ -21,7 +21,7 @@ export default function Transactions(props) {
 	const findTotal = (objectArr) => {
 		let total = 0;
 		objectArr.forEach((item) => {
-			total += item.amount;
+			total += parseInt(item.amount);
 		});
 		return total;
 	};
@@ -42,7 +42,7 @@ export default function Transactions(props) {
 					<Transaction
 						key={index}
 						index={index}
-						data={transaction.date}
+						date={transaction.date}
 						amount={transaction.amount}
 						from={transaction.from}
 						item_name={transaction.item_name}
